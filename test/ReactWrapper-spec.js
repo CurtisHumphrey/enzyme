@@ -139,8 +139,8 @@ describeWithDOM('mount', () => {
       ];
 
       const passes = [
-        <span>Hello</span>,
         <div>Goodbye</div>,
+        <span>More</span>,
       ];
 
       expect(wrapper.contains(fails)).to.equal(false);
