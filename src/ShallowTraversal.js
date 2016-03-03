@@ -134,7 +134,7 @@ export function buildPredicate(selector) {
           // selector is a string. match to DOM tag or constructor displayName
           return node => nodeHasType(node, selector);
       }
-      break;
+
     case 'object':
       if (!Array.isArray(selector) && selector !== null && !isEmpty(selector)) {
         return node => nodeMatchesObjectProps(node, selector);
