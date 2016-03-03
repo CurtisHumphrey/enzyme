@@ -216,7 +216,7 @@ export function buildInstPredicate(selector) {
           // selector is a string. match to DOM tag or constructor displayName
           return inst => instHasType(inst, selector);
       }
-      break;
+
     case 'object':
       if (!Array.isArray(selector) && selector !== null && !isEmpty(selector)) {
         return node => instMatchesObjectProps(node, selector);
