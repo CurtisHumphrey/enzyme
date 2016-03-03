@@ -19,6 +19,9 @@ import {
   isElement,
   findDOMNode,
 } from './react-compat';
+import {
+  nodeHasType,
+} from './ShallowTraversal';
 import { REACT013, REACT014 } from './version';
 
 export function internalInstance(inst) {
@@ -62,8 +65,7 @@ export function instHasId(inst, id) {
 export function instHasType(inst, type) {
   switch (typeof type) {
     case 'string':
-      return isDOMComponent(inst) &&
-        inst.tagName.toUpperCase() === type.toUpperCase();
+      return nodeHasType(getNode(inst), type);
     case 'function':
       return isCompositeComponentWithType(inst, type);
     default:
