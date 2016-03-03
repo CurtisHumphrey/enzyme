@@ -19,6 +19,9 @@ import {
   isElement,
   findDOMNode,
 } from './react-compat';
+import {
+  nodeHasType,
+} from './ShallowTraversal';
 import { REACT013, REACT014 } from './version';
 
 export function internalInstance(inst) {
@@ -62,8 +65,7 @@ export function instHasId(inst, id) {
 export function instHasType(inst, type) {
   switch (typeof type) {
     case 'string':
-      return isDOMComponent(inst) &&
-        inst.tagName.toUpperCase() === type.toUpperCase();
+      return nodeHasType(getNode(inst), type);
     case 'function':
       return isCompositeComponentWithType(inst, type);
     default:
@@ -214,7 +216,7 @@ export function buildInstPredicate(selector) {
           // selector is a string. match to DOM tag or constructor displayName
           return inst => instHasType(inst, selector);
       }
-
+      break;
     case 'object':
       if (!Array.isArray(selector) && selector !== null && !isEmpty(selector)) {
         return node => instMatchesObjectProps(node, selector);
